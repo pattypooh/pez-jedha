@@ -3,10 +3,18 @@ from scrapy.http import Request
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 import logging
+from scrapy.utils.log import configure_logging
 
 logger = logging.getLogger(__name__)
 
 class BookingSpider(scrapy.Spider):
+    configure_logging(install_root_handler=False)
+    logging.basicConfig(
+        filename='bookingspylog.txt',
+        format='%(asctime)s: %(levelname)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
+        level=logging.INFO
+    )
+
     name = 'bookingspy'
     allowed_domains = ['booking.com']
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -19,10 +27,9 @@ class BookingSpider(scrapy.Spider):
     def __init__(self, cities_path = None, *args, **kwargs):
         #cities = ["Mont+Saint+Michel","Saint+Malo","Lille"]
         cities = ["Auterive"]
+        super(BookingSpider, self).__init__(*args, **kwargs)
         self.cities = cities
         self.start_urls = self._build_start_urls(cities)
-        super(BookingSpider, self).__init__(*args, **kwargs)
-
 
     def _build_start_url(self, city:str):
         return f'https://www.booking.com/searchresults.fr.html?lang=fr&ss={city}'
@@ -58,6 +65,7 @@ class BookingSpider(scrapy.Spider):
     
     #def parse_booking_page(self, response):
         
+        logging.info('***********************************************************************')
         print('***********************************************************************')
         divs = response.xpath('//div[contains(@class,"sr_item_new")]')
         print(f'hotels in page= {len(divs)}')
