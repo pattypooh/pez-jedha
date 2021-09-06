@@ -23,10 +23,13 @@ class BookingSpider(scrapy.Spider):
     custom_settings = {
         'AUTOTHROTTLE_ENABLED': 'True',
     }
-
     def __init__(self, cities_path = None, *args, **kwargs):
-        #cities = ["Mont+Saint+Michel","Saint+Malo","Lille"]
-        cities = ["Auterive"]
+        #cities = ["Mont Saint Michel","St Malo","Bayeux","Le Havre","Rouen","Paris","Amiens","Lille","Strasbourg",
+        #  "Chateau du Haut Koenigsbourg","Colmar","Eguisheim","Besancon","Dijon","Annecy","Grenoble","Lyon",
+        #  "Gorges du Verdon","Bormes les Mimosas","Cassis","Marseille","Aix en Provence","Avignon","Uzes","Nimes",
+        #  "Aigues Mortes","Saintes Maries de la mer","Collioure","Carcassonne","Ariege","Toulouse","Montauban",
+        #  "Biarritz","Bayonne","La Rochelle"]
+        cities = ["Amiens"]
         super(BookingSpider, self).__init__(*args, **kwargs)
         self.cities = cities
         self.start_urls = self._build_start_urls(cities)
@@ -53,56 +56,47 @@ class BookingSpider(scrapy.Spider):
             'Accept-Encoding': 'gzip, deflate, br',
             'Accept-Language': 'en-US,en;q=0.9',
         }
-        #print(f'URL = {self.start_urls}')
-        for url in self.start_urls:
-            print(f'------------starting with url={url}')
-            yield Request(url, headers=headers, dont_filter=True)
+        cb_kwargs = {}
+        for i, url in enumerate(self.start_urls):
+            print(f'*****starting with url={url}******')
+            cb_kwargs['city']=self.cities[i] #Passe the current city to Request
+            yield Request(url, headers=headers, dont_filter=False, cb_kwargs=cb_kwargs)
 
-    def parse(self, response):
-        with open('./booking-page-{}.html', 'w') as file_obj:
-            file_obj.write(response.text)
-        #self.parse_booking_page(response)
-    
-    #def parse_booking_page(self, response):
-        
-        logging.info('***********************************************************************')
-        print('***********************************************************************')
+    def parse(self, response, city):
+        #with open(f'./booking-page-{self.being_scrapped}.html', 'w') as file_obj:
+        #    file_obj.write(response.text) 
+        logging.debug(f'Parsing page for {city}')
         divs = response.xpath('//div[contains(@class,"sr_item_new")]')
-        print(f'hotels in page= {len(divs)}')
-        names = divs[0].xpath('descendant::span[contains(@class,"sr-hotel__name")]/text()').extract()
-        print(f'name={names}')
-
-        print('***********************************************************************')
-
         for div in divs:
             data_coords = div.xpath('descendant::a[contains(@class,"bui-link")]/@data-coords').get()
             url_hotel = div.xpath('descendant::a[contains(@class,"bui-link")]/@href').get()
 
             yield{
+                'city': city,
                 'name' : div.xpath('descendant::span[contains(@class,"sr-hotel__name")]/text()').get().strip(),
                 'url' :  url_hotel.split('?')[0],
                 'latitude' : data_coords.split(',')[0], #first element is latitude
                 'longitude': data_coords.split(',')[1], # second element is longitude
                 'desc' : self._strip(div.xpath('descendant::div[contains(@class,"hotel_desc")]/text()').get()),
-                'etoiles' : div.xpath('descendant::span[contains(@class,"bui-rating--smaller")]/@aria-label').get(),
-                'note' : self._strip(div.xpath('descendant::div[contains(@class,"bui-review-score__badge")]/text()').get()),
-                'reviews' : div.xpath('descendant::div[contains(@class,"bui-review-score__text")]/text()').get(),
+                'etoiles' : self._extract_first(div.xpath('descendant::span[contains(@class,"bui-rating--smaller")]/@aria-label').get()),
+                'note' : self._extract_first(div.xpath('descendant::div[contains(@class,"bui-review-score__badge")]/text()').get()),
+                'reviews' : self._extract_first(div.xpath('descendant::div[contains(@class,"bui-review-score__text")]/text()').get()),
             }
 
-            try:
-                next_page = response.xpath('//a[contains(@class,"paging-next")]/@href').get()
-                print(f'next page type = {type(next_page)}')
-                yield response.follow(next_page, callback = self.parse)
-                
-            except (ValueError, KeyError) as noNextKeyError:
-                #logging.info('There is no next page. The crawling process will terminate')
-                print('There is no next page. The crawling process will terminate')
+        try:
+            next_page = response.xpath('//a[contains(@class,"paging-next")]/@href').get()
+            logging.info('Retrieving next page')
+            yield response.follow(next_page, callback = self.parse, cb_kwargs={'city': city}) 
+        except (ValueError, KeyError) as noNextKeyError:
+            logging.info('There is no next page. The crawling process will terminate')
+            print(f'There is no next page. The crawling process will terminate: {noNextKeyError}')  
+    
 
     def _strip(self, text):
         if text is not None:
             return text.strip()
         return ''
-
-    def _get_etoiles(self, text_etoiles):
-        #Stars are defined in a text like this "2 out of 5". We retrieve only the first character
-        return self._strip(text_etoiles).split(' ')[0]
+   
+    def _extract_first(self, fromtext):
+        #REviews are defined in a text like this " 23 experiences vecues"
+        return self._strip(fromtext).split(' ')[0]
