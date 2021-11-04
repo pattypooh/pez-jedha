@@ -1,5 +1,5 @@
 import pandas as pd
 
 def remove_nan():
-    print('test')
+    cols=['Weekly_Sales']
     

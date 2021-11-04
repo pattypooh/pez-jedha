@@ -127,3 +127,20 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PEZ: csvfiles
+*.csv
+*.zip
+*Zone.Identifier
+*.deb
+*.yaml
+*.mapbox_token
+/projects/03-kayak/data
+*.cfg
+
+# PEZ: exclude modules and keep only the projects
+modules
+aws
+tobedeleted
+snippets
+

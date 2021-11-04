@@ -40,3 +40,6 @@ seaborn
 #yaml
 scrapy
 beautifulsoup4
+pandas-profiling
+spacy
+wordcloud
