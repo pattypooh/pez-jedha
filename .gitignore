@@ -143,4 +143,9 @@ modules
 aws
 tobedeleted
 snippets
-
+*.doc
+*.pdf
+.gitkeep
+projects/09-perso/docs/make.bat
+projects/09-perso/docs/Makefile
+projects/09-perso/docs/index.rst
