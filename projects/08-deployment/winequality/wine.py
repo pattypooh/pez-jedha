@@ -1,22 +1,24 @@
-from flask import Flask, request, jsonify,  render_template
+from flask import Flask, request, jsonify,  render_template, url_for
 
 import joblib
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
     '''
-    returns a page
+    returns an index page
     '''
-    print('in index.html')
+    print('///In index.html')
     return render_template('index.html')
 
 @app.route("/predict", methods=["POST"])
 def predict():
     '''
-    predicts wine quality
+    Rredicts wine quality
     '''
+    #if request.form.get('action-predict') == 'Submit':
+        #print('Button submit pressed')
     # Check if request has a JSON content
     if request.json:
         # Get the JSON as dictionnary
@@ -32,7 +34,7 @@ def predict():
             # result so as to be serializable by jsonify()
             #prediction = str(prediction[0])
             return jsonify([str(pred) for pred in prediction]), 200
-    return jsonify({"msg": "Error: not a JSON or no email key in your request"})
+    return jsonify({"msg": "Error: not a JSON or no input key in your request"})
 
 if __name__ == "__main__":
     #app.run(debug=True)
