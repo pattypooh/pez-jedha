@@ -28,42 +28,33 @@ It's a Kaggle competition where the dataset was compiled by Columbia Business Sc
 
 ### 4. Walmart
 
-**Objective**
+**Objective** Estimate the weekly sales of walmart stores
 
-#suvpervised learning #scikitlearn #pandas #matplotlib #seaborn #Pipeline #LinearRegression #RandomForests
+#suvpervised learning #scikitlearn #pandas #matplotlib #seaborn #Pipeline #LinearRegression #RandomForests #Regularization
 
 5. Uber
 
-**Objective**
+**Objective**  Identify the hot zones of uber pickups by day
 
 #unsupervised learning #pandas #scikitlearn #matplotlib #plotly #Pipeline #Kmeans #DBScan #Regularization
 
-### 6. Tweets
+### 6. Tweets  
 
-**Objective**
+**Objective**  Classify tweets in 2 categories: disaster or not-disaster
 
 #deeplearning #nlp #spacy #pandas #scikitlearn
 
 7. Deployment
 
-**Objective** Deploy a model
+**Objective** Put the trained model into production.
+This project is in another repository, please go here: [wine_quality] (https://github.com/pattypooh/wine-quality)
 
-#Heroku #Flask #conda #API
+#Heroku #Flask #conda #API #html #json
 
 8. Personal project - Agribalyse
 
-#featureengineering #pandas #seaboarn #matplotlib #
 
-**Objective**
+**Objective**  Make an application that predicts the environmental impact of the ingredients in a dish recipe
+This project is in another repository, please go here: [agribalyse] (https://github.com/pattypooh/agribalyse)
 
--
-
-The training lasted 6 months, part time. We had different modules and for some, besides the classes and exercises, we had to developpe
-What was my motivation?
-Why did you build this project?
-What problem does it solve?
-What did you learn?
-What makes your project stand out?
-Some of the challenges you faced and features you hope to implement in the future.
-
-### How to Install and Run the Project
+ #pandas #seaboarn #matplotlib #scikitlearn #featureengineering #heroku #streemlit
