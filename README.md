@@ -32,7 +32,7 @@ It's a Kaggle competition where the dataset was compiled by Columbia Business Sc
 
 #suvpervised learning #scikitlearn #pandas #matplotlib #seaborn #Pipeline #LinearRegression #RandomForests #Regularization
 
-5. Uber
+### 5. Uber
 
 **Objective**  Identify the hot zones of uber pickups by day
 

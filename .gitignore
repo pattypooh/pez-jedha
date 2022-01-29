@@ -137,6 +137,7 @@ dmypy.json
 *.mapbox_token
 /projects/03-kayak/data
 *.cfg
+*.txt
 
 # PEZ: exclude modules and keep only the projects
 modules
@@ -149,3 +150,6 @@ snippets
 projects/09-perso/docs/make.bat
 projects/09-perso/docs/Makefile
 projects/09-perso/docs/index.rst
+
+# PEZ: vscode
+.vscode
