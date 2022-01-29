@@ -44,14 +44,14 @@ It's a Kaggle competition where the dataset was compiled by Columbia Business Sc
 
 #deeplearning #nlp #spacy #pandas #scikitlearn
 
-7. Deployment
+### 7. Deployment
 
 **Objective** Put the trained model into production.
 This project is in another repository, please go here: [wine_quality] (https://github.com/pattypooh/wine-quality)
 
 #Heroku #Flask #conda #API #html #json
 
-8. Personal project - Agribalyse
+### 8. Personal project - Agribalyse
 
 
 **Objective**  Make an application that predicts the environmental impact of the ingredients in a dish recipe
