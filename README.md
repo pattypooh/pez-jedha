@@ -57,4 +57,9 @@ This project is in another repository, please go here: [wine_quality] (https://g
 **Objective**  Make an application that predicts the environmental impact of the ingredients in a dish recipe
 This project is in another repository, please go here: [agribalyse] (https://github.com/pattypooh/agribalyse)
 
+To check the application running in Heroku, go here https://envfoodprint.herokuapp.com/
+
  #pandas #seaboarn #matplotlib #scikitlearn #featureengineering #heroku #streemlit
+ 
+ 
+ 
