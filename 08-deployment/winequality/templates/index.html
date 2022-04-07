@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Wine quality prediciton</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div>
+    <h1>API Documentation : wine quality prediction ❤️</h1>
+    <h2>Endpoints</h2>
+  </div>
+  <div>
+    <p>This end point allows you to make a prediction of a wine quality, from 1 to 10, according to some parameters</p>
+    <h2><b> How to request this endpoint</b></h2>
+    <p>You should request this endpoint using a POST method with JSON content,  Your JSON should contain the values, separated by comas, for the following parameters</p>
+    <ul>
+            				 					
+      <li>Parameter 1: fixed acidity</li>
+      <li>Parameter 2: volatile acidity</li>
+      <li>Parameter 3: citric acid</li>
+      <li>Parameter 4: residual sugar</li>
+      <li>Parameter 5: chlorides</li>
+      <li>Parameter 6: free sulfur dioxide</li>
+      <li>Parameter 7: total sulfur dioxide</li>
+      <li>Parameter 8: density</li>
+      <li>Parameter 9: pH</li>
+      <li>Parameter 10: sulphates</li>
+      <li>Parameter 11: alcohol</li>
+     </ul>
+  </div>
+    
+      <div>
+        Example using curl in localhost: <br>
+        curl -i -H "Content-Type: application/json" -X POST -d '{"input": [[7.0, 0.27, 0.36, 20.7, 0.045, 45.0, 170.0, 1.001, 3.0, 0.45, 8.8]]}' http://localhost:5000/predict <br>
+        <br>
+
+           If you're using the deployed application: <br>
+           curl -i -H "Content-Type: application/json" -X POST -d '{"input": [[7.0, 0.27, 0.36, 20.7, 0.045, 45.0, 170.0, 1.001, 3.0, 0.45, 8.8]]}' https://pez-wine-app.herokuapp.com/predict
+          
+      </div>
+      <div>
+        <div>
+          <p>
+          Example using requests in localhost: <br>
+        import requests <br>
+        response = requests.post("http://127.0.0.1:5000/predict", json={"input": [[7.0, 0.27, 0.36, 20.7, 0.045, 45.0, 170.0, 1.001, 3.0, 0.45, 8.8]]}) <br>
+        response.json() <br>
+      </p>
+      <br>
+      <p>
+        Example using requests with the deployed app: <br>
+      import requests <br>
+      response = requests.post("https://pez-wine-app.herokuapp.com/predict", json={"input": [[7.0, 0.27, 0.36, 20.7, 0.045, 45.0, 170.0, 1.001, 3.0, 0.45, 8.8]]}) <br>
+      response.json() <br>
+    </p>
+          </div>
+      </div>
+    <div>
+    </div>
+<!-- 
+  For a futur version of this app, a form will be proposed to call the API.
+      <form action="/predict" method="post" role="form">
+        <div class="form-group">
+      
+      
+      <label for="name">Input:</label>
+      <div>
+      <input type="text" class="form-control" name="input" placeholder="Enter here the list of values between brackets, like the example">
+    </div>
+      <button type="submit" class="btn btn-success" name="action-predict">Submit</button>
+</form>
+-->
+  
+</body>
+
+</html>
