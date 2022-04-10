@@ -4,7 +4,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.http import Request
 
 
-class BookingCrawlspiderSpider(CrawlSpider):
+class BookingCrawlSpider(scrapy.Spider):
     name = 'booking-crawlspider'
     allowed_domains = ['www.booking.com']
     start_urls = ['https://www.booking.com/searchresults.fr.html?lang=fr/']
@@ -14,23 +14,16 @@ class BookingCrawlspiderSpider(CrawlSpider):
         Rule(le_next,follow=True),
     )
 
-    def __init__(self, cities_path = None, *args, **kwargs):
-        #cities = ["Mont+Saint+Michel","Saint+Malo","Lille"]
-        cities = ["Mont+Saint+Michel"]
+    def __init__(self, cities = None, *args, **kwargs):
         self.cities = cities
         self.start_urls = self._build_start_urls(cities)
         super(CrawlSpider, self).__init__(*args, **kwargs)
 
-
-    def _build_start_url(self, city:str):
-        return f'https://www.booking.com/searchresults.fr.html?lang=fr&ss={city}'
-
     def _build_start_urls(self, cities: list):
-        return [self._build_start_url(city) for city in cities]
+        return [f'https://www.booking.com/searchresults.fr.html?lang=fr&ss={city}' for city in cities]
 
     def start_requests(self):
-        #start_urls = ['https://www.booking.com/searchresults.fr.html?lang=fr&ss=Saint+Malo']
-
+        #Define my request headers
         headers = {
             'Connection': 'keep-alive',
             'Cache-Control': 'max-age=0',

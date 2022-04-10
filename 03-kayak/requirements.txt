@@ -4,7 +4,7 @@
 # external requirements
 awscli
 
-# PES: env requirements
+# env requirements
 jupyterlab
 ipykernel
 ipython
@@ -24,4 +24,3 @@ seaborn
 #yaml
 scrapy
 beautifulsoup4
-pandas-profiling
