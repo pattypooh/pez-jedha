@@ -1,0 +1,9 @@
+{
+	"name": "tokyo-olimpics-datafact",
+	"location": "francecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "72c6e20c-470d-431e-89ea-c3a537b0d3da",
+		"tenantId": "1544a23c-763a-4f82-b6a3-1993c5335148"
+	}
+}
