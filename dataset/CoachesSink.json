@@ -1,5 +1,5 @@
 {
-	"name": "DataLakeService",
+	"name": "CoachesSink",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "athletes.csv",
+				"fileName": "coaches.csv",
 				"folderPath": "raw-data",
 				"fileSystem": "tokyo-olympics-data"
 			},
