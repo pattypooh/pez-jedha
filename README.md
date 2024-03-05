@@ -49,13 +49,15 @@ Building and feeding a data infrastructure
 **Objective** Put a trained model into production.
 This project is in another repository, please go here: [wine_quality] (https://github.com/pattypooh/wine-quality)
 
-#Heroku #Flask #conda #API #html #json #github
+#Heroku #Flask #conda #API #html #json #github 
+
 
 ### 8. Personal project - Agribalyse
 
 **Objective** Make an application that predicts the environmental impact of the ingredients in a dish recipe
 This project is in another repository, please go here: [agribalyse] (https://github.com/pattypooh/agribalyse)
 
-To check the application running in Heroku, go here https://envfoodprint.herokuapp.com/
+To check the application running in Heroku, go here https://envfoodprint.herokuapp.com/ --> Sorry, the app is not in Heroku anymore.
+
 
 #pandas #seaboarn #matplotlib #scikitlearn #featureengineering #heroku #streemlit
